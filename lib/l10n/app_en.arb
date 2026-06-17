@@ -948,6 +948,13 @@
   "settingsSlideshowIntervalTile": "Interval",
   "settingsSlideshowVideoPlaybackTile": "Video playback",
   "settingsSlideshowVideoPlaybackDialogTitle": "Video Playback",
+  "settingsAppOrientationTile": "App orientation",
+  "settingsAppOrientationDialogTitle": "App orientation",
+  "appOrientationSystem": "System",
+  "appOrientationPortrait": "Portrait",
+  "appOrientationLandscape": "Landscape",
+  "appOrientationReversePortrait": "Reverse portrait",
+  "appOrientationReverseLandscape": "Reverse landscape",
 
   "settingsVideoPageTitle": "Video Settings",
   "settingsVideoSectionTitle": "Video",

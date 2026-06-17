@@ -124,6 +124,19 @@ extension ExtraSlideshowVideoPlaybackView on SlideshowVideoPlayback {
   }
 }
 
+extension ExtraAppOrientationView on AppOrientation {
+  String getName(BuildContext context) {
+    final l10n = context.l10n;
+    return switch (this) {
+      AppOrientation.system => l10n.appOrientationSystem,
+      AppOrientation.portrait => l10n.appOrientationPortrait,
+      AppOrientation.landscape => l10n.appOrientationLandscape,
+      AppOrientation.reversePortrait => l10n.appOrientationReversePortrait,
+      AppOrientation.reverseLandscape => l10n.appOrientationReverseLandscape,
+    };
+  }
+}
+
 extension ExtraOverlayHistogramStyleView on OverlayHistogramStyle {
   String getName(BuildContext context) {
     final l10n = context.l10n;

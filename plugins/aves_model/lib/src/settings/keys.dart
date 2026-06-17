@@ -181,6 +181,7 @@ class SettingKeys {
   static const slideshowTransitionKey = 'slideshow_transition';
   static const slideshowVideoPlaybackKey = 'slideshow_video_playback';
   static const slideshowIntervalKey = 'slideshow_interval';
+  static const appOrientationKey = 'app_orientation';
 
   // widget
   static const widgetOutlinePrefixKey = '${_widgetKeyPrefix}outline_';

@@ -451,6 +451,7 @@ class Settings
           case SettingKeys.screenSaverVideoPlaybackKey:
           case SettingKeys.slideshowTransitionKey:
           case SettingKeys.slideshowVideoPlaybackKey:
+          case SettingKeys.appOrientationKey:
             if (newValue is String) {
               store.setString(key, newValue);
             } else {

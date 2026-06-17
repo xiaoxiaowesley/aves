@@ -11,6 +11,7 @@ import 'package:aves/model/device.dart';
 import 'package:aves/model/filters/recent.dart';
 import 'package:aves/model/settings/defaults.dart';
 import 'package:aves/model/settings/enums/display_refresh_rate_mode.dart';
+import 'package:aves/model/settings/enums/app_orientation.dart';
 import 'package:aves/model/settings/enums/screen_on.dart';
 import 'package:aves/model/settings/enums/theme_brightness.dart';
 import 'package:aves/model/settings/settings.dart';
@@ -309,6 +310,23 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
                                 darkTheme: darkTheme,
                                 themeMode: themeBrightness.appThemeMode,
                                 locale: settingsLocale,
+                                localeListResolutionCallback: (locales, supportedLocales) {
+                                  // when user has explicitly set a locale, use it directly
+                                  if (settingsLocale != null) return settingsLocale;
+                                  if (locales != null) {
+                                    for (final locale in locales) {
+                                      if (locale.languageCode == 'zh') {
+                                        // map Traditional Chinese regions (TW, HK, MO) to zh_Hant
+                                        final country = locale.countryCode;
+                                        if (country == 'TW' || country == 'HK' || country == 'MO') {
+                                          return const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant');
+                                        }
+                                        return const Locale('zh');
+                                      }
+                                    }
+                                  }
+                                  return basicLocaleListResolution(locales, supportedLocales);
+                                },
                                 localizationsDelegates: const [
                                   // order matters for resolution of sublocales (e.g. `en_Shaw` before `en`)
                                   ...LocalizationsEnShaw.delegates,
@@ -490,6 +508,8 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
 
     void _applyKeepScreenOn() => settings.keepScreenOn.apply();
 
+    void _applyAppOrientation() => settings.appOrientation.apply();
+
     void _applyIsRotationLocked() {
       if (!settings.isRotationLocked && !settings.useTvLayout) {
         windowService.requestOrientation();
@@ -505,6 +525,8 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
     settingStream.where((event) => event.key == SettingKeys.maxBrightnessKey).listen((_) => _applyMaxBrightness());
     // navigation
     settingStream.where((event) => event.key == SettingKeys.keepScreenOnKey).listen((_) => _applyKeepScreenOn());
+    // slideshow
+    settingStream.where((event) => event.key == SettingKeys.appOrientationKey).listen((_) => _applyAppOrientation());
     // platform settings
     settingStream.where((event) => event.key == SettingKeys.platformAccelerometerRotationKey).listen((_) => _applyIsRotationLocked());
 
@@ -512,6 +534,7 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
     _applyDisplayRefreshRateMode();
     _applyMaxBrightness();
     _applyKeepScreenOn();
+    _applyAppOrientation();
     _applyIsRotationLocked();
   }
 

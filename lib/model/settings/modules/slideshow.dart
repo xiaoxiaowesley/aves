@@ -29,4 +29,8 @@ mixin SlideshowSettings on SettingsAccess {
   int get slideshowInterval => getInt(SettingKeys.slideshowIntervalKey) ?? SettingsDefaults.slideshowInterval;
 
   set slideshowInterval(int newValue) => set(SettingKeys.slideshowIntervalKey, newValue);
+
+  AppOrientation get appOrientation => getEnumOrDefault(SettingKeys.appOrientationKey, SettingsDefaults.appOrientation, AppOrientation.values);
+
+  set appOrientation(AppOrientation newValue) => set(SettingKeys.appOrientationKey, newValue.name);
 }

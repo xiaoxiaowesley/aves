@@ -1,5 +1,7 @@
 enum AccessibilityAnimations { system, disabled, enabled }
 
+enum AppOrientation { system, portrait, landscape, reversePortrait, reverseLandscape }
+
 enum AccessibilityTimeout { system, s1, s3, s5, s10, s30 }
 
 enum AvesThemeBrightness { system, light, dark, black }

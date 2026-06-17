@@ -135,6 +135,7 @@ class SettingsDefaults {
   static const slideshowTransition = ViewerTransition.fade;
   static const slideshowVideoPlayback = SlideshowVideoPlayback.playMuted;
   static const int slideshowInterval = 5;
+  static const appOrientation = AppOrientation.system;
 
   // widget
   static const widgetOutline = false;

@@ -183,6 +183,16 @@ class PlatformWindowService implements WindowService {
     }
   }
 
+  Future<void> requestOrientationCode(int orientationCode) async {
+    try {
+      await _platform.invokeMethod('requestOrientation', <String, Object?>{
+        'orientation': orientationCode,
+      });
+    } on PlatformException catch (e, stack) {
+      await reportService.recordError(e, stack);
+    }
+  }
+
   @override
   Future<void> showSystemUI(bool visible) async {
     // since Flutter v3.44 `SystemChrome.setEnabledSystemUIMode` is unreliable,
